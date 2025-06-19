@@ -3,7 +3,6 @@ package com.testinium.step;
 import com.testinium.base.BaseTest;
 import com.testinium.model.ElementInfo;
 import com.thoughtworks.gauge.Step;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -15,7 +14,6 @@ import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BaseSteps extends BaseTest {
