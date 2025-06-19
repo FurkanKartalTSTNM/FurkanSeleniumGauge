@@ -10,10 +10,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Driver;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static org.assertj.core.api.Fail.fail;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BaseSteps extends BaseTest {
@@ -168,7 +170,7 @@ public class BaseSteps extends BaseTest {
 
 
     @Step({"Click to element <key>",
-            "Elementine tıkla <key>"})
+            "<key> elementine tıkla "})
     public void clickElement(String key) {
         if (!key.isEmpty()) {
             hoverElement(findElement(key));
@@ -900,6 +902,16 @@ public class BaseSteps extends BaseTest {
             driver.quit();
         }
     }
+
+    @Step("Şu anki url <url> ile aynı mı")
+    public void checkCurrentUrlEquals(String url) {
+        String currentUrl = driver.getCurrentUrl();
+        if (!currentUrl.equals(url)) {
+            fail("Beklenen URL: " + url + ", ancak şu anki URL: " + currentUrl);
+        }
+    }
+
+
 
 
 }
