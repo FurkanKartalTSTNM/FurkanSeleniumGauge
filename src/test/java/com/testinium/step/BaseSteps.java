@@ -832,6 +832,76 @@ public class BaseSteps extends BaseTest {
         elements.get(index).click();
     }
 
+    @Step("Verify homepage is loaded successfully")
+    public void verifyHomepage() {
+        String title = driver.getTitle().toLowerCase();
+        Assertions.assertTrue(title.contains("amazon"), "Homepage title should contain 'amazon'");
+    }
+
+    @Step("Enter <searchTerm> into search box")
+    public void enterSearchTerm(String searchTerm) {
+        WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+        searchBox.clear();
+        searchBox.sendKeys(searchTerm);
+    }
+
+    @Step("Click search button")
+    public void clickSearchButton() {
+        WebElement searchBtn = driver.findElement(By.id("nav-search-submit-button"));
+        searchBtn.click();
+    }
+
+    @Step("Verify search results page is loaded successfully")
+    public void verifySearchResultsPage() {
+        WebElement resultsHeader = driver.findElement(By.cssSelector("span.a-color-state.a-text-bold"));
+        Assertions.assertTrue(resultsHeader.isDisplayed(), "Search results header should be visible");
+    }
+
+    @Step("Verify at least 10 products are listed in the results")
+    public void verifyProductCount() {
+        List<WebElement> products = driver.findElements(By.cssSelector("div.s-main-slot div.s-result-item"));
+        Assertions.assertTrue(products.size() >= 10, "There should be at least 10 products listed");
+    }
+
+    @Step("Select a random product from the search results")
+    public void selectRandomProduct() {
+        List<WebElement> products = driver.findElements(By.cssSelector("div.s-main-slot div.s-result-item[data-component-type='s-search-result']"));
+        Random random = new Random();
+        WebElement product = products.get(random.nextInt(products.size()));
+        product.findElement(By.cssSelector("h2 a")).click();
+    }
+
+    @Step("Verify redirection to product detail page")
+    public void verifyProductDetailPage() {
+        WebElement title = driver.findElement(By.id("productTitle"));
+        Assertions.assertTrue(title.isDisplayed(), "Product title should be visible on detail page");
+    }
+
+    @Step("Verify product title and price are visible")
+    public void verifyTitleAndPrice() {
+        WebElement title = driver.findElement(By.id("productTitle"));
+        Assertions.assertTrue(title.isDisplayed(), "Product title should be visible");
+
+        WebElement priceWhole = driver.findElement(By.cssSelector("span.a-price-whole"));
+        WebElement priceFraction = driver.findElement(By.cssSelector("span.a-price-fraction"));
+        Assertions.assertTrue(priceWhole.isDisplayed(), "Price whole part should be visible");
+        Assertions.assertTrue(priceFraction.isDisplayed(), "Price fraction part should be visible");
+    }
+
+    @Step("Verify product can be added to cart")
+    public void verifyAddToCartAvailable() {
+        WebElement addToCartBtn = driver.findElement(By.id("add-to-cart-button"));
+        Assertions.assertTrue(addToCartBtn.isDisplayed() && addToCartBtn.isEnabled(), "Add to Cart button should be visible and enabled");
+    }
+
+    @Step("Close the browser")
+    public void closeBrowser() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
+
 }
 
 
