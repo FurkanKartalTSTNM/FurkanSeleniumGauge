@@ -34,6 +34,16 @@ tags:Success
 * Click search button
 * Verify search results page is loaded successfully
 * Verify at least 10 products are listed in the results
+
+
+## Failure product search and open detail page on Amazon Turkey
+tags:Failure
+* "https://www.amazon.com.tr/" adresine git
+* Verify homepage is loaded successfully
+* Enter "Bluetooth kulaklık" into search box
+* Click search button
+* Verify search results page is loaded successfully
+* Verify at least 10 products are listed in the results
 * Select a random product from the search results
 * Verify redirection to product detail page
 * Verify product title and price are visible
